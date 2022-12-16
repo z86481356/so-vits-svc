@@ -14,7 +14,7 @@ from inference.infer_tool import Svc
 logging.getLogger('numba').setLevel(logging.WARNING)
 chunks_dict = infer_tool.read_temp("inference/chunks_temp.json")
 
-model_path = "logs/48k/G_174000-Copy1.pth"
+model_path = "logs/48k/G_2000.pth"
 config_path = "configs/config.json"
 svc_model = Svc(model_path, config_path)
 infer_tool.mkdir(["raw", "results"])
@@ -46,7 +46,7 @@ for clean_name, tran in zip(clean_names, trans):
     audio_data, audio_sr = slicer.chunks2audio(wav_path, chunks)
 
     for spk in spk_list:
-        audio = []
+        audio = [test]
         for (slice_tag, data) in audio_data:
             print(f'#=====segment start, {round(len(data) / audio_sr, 3)}s======')
             length = int(np.ceil(len(data) / audio_sr * svc_model.target_sample))
